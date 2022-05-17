@@ -49,6 +49,37 @@ class Assignment extends React.Component {
     this.setState({selected: event.target.value});
   }
   
+    // Add assignment
+    addAssignment = (assignment) => {
+      const token = Cookies.get('XSRF-TOKEN');
+   
+      fetch(`${SERVER_URL}/assignment`,
+        { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json',
+                     'X-XSRF-TOKEN': token  }, 
+          body: JSON.stringify(assignment)
+        })
+      .then(res => {
+          if (res.ok) {
+            toast.success("Assignment successfully added", {
+                position: toast.POSITION.BOTTOM_LEFT
+            });
+            this.fetchAssignments();
+          } else {
+            toast.error("Error when adding", {
+                position: toast.POSITION.BOTTOM_LEFT
+            });
+            console.error('Post http status =' + res.status);
+          }})
+      .catch(err => {
+        toast.error("Error when adding", {
+              position: toast.POSITION.BOTTOM_LEFT
+          });
+          console.error(err);
+      })
+    } 
+
   render() {
      const columns = [
       {
@@ -76,6 +107,11 @@ class Assignment extends React.Component {
       return (
           <div align="left" >
             <h4>Assignment(s) ready to grade: </h4>
+              <Grid container>
+                <Grid item>
+                  <AddAssignment addAssignment={this.addAssignment} />  
+                </Grid>  
+              </Grid>  
               <div style={{ height: 450, width: '100%', align:"left"   }}>
                 <DataGrid rows={this.state.assignments} columns={columns} />
               </div>                

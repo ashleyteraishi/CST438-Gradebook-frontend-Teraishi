@@ -30,6 +30,7 @@ class AddAssignment extends Component {
 
     // Save assignment and close modal form
     handleAdd = () => {
+      // set assignment values
       const assignment = {
         courseId: this.state.courseId,
         assignmentName: this.state.assignmentName,
@@ -48,6 +49,7 @@ class AddAssignment extends Component {
             <Dialog open={this.state.open} onClose={this.handleClose}>
                 <DialogTitle>Add Assignment</DialogTitle>
                 <DialogContent  style={{paddingTop: 20}} >
+                  // get assignment input from the user
                   <TextField autoFocus fullWidth label="Assignment Name" name="assignmentName" onChange={this.handleChange} style={{marginTop: 20}} /> 
                   <TextField fullWidth label="Course Id" name="courseId" onChange={this.handleChange} style={{marginTop: 20}} /> 
                   <TextField fullWidth label="Due Date" name="dueDate" onChange={this.handleChange} style={{marginTop: 20}} /> 
