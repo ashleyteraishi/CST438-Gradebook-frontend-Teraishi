@@ -112,11 +112,11 @@ class Assignment extends React.Component {
     return (
       <div align="left" >
         <h4>Assignment(s) ready to grade: </h4>
-        <Grid container>
-          <Grid item>
-            <AddAssignment addAssignment={this.addAssignment} />
-          </Grid>
-        </Grid>
+        
+        <Button id="AddAssignment">
+          <AddAssignment addAssignment={this.addAssignment} />
+        </Button>
+          
         <div style={{ height: 450, width: '100%', align: "left" }}>
           <DataGrid rows={this.state.assignments} columns={columns} />
         </div>
